@@ -33,6 +33,7 @@ RSpec.describe Cart, :type => :model do
     it 'creates an appropriate line_item' do
       second_item = Item.second
       second_line_item = @cart.add_item(second_item.id)
+      #binding.pry
       expect(second_line_item.quantity).to eq(1)
       expect(second_line_item.item_id).to eq(second_item.id)
       expect(second_line_item.cart_id).to eq(@cart.id)
