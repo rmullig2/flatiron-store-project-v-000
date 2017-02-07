@@ -2,6 +2,7 @@ class Cart < ActiveRecord::Base
   has_many :line_items
   has_many :items, through: :line_items
   belongs_to :user
+  attr_accessor :status
   
   def total
     total = 0.0
@@ -21,5 +22,9 @@ class Cart < ActiveRecord::Base
     end
     LineItem.new(cart_id: self.id, item_id: id)
   end
+  
+  #def status=(s)
+  #  @status = s
+  #end
   
 end
