@@ -13,6 +13,19 @@ class User < ActiveRecord::Base
   
   attr_accessor :current_cart_id
   
+  def current_cart
+    Cart.find_by(user_id: self.id, id: self.current_cart_id)
+  end
+  
+  def current_cart=(c)
+    if !c.nil?
+      self.carts << c
+      new = CurrentCart.create(user_id: self.id, cart_id: c.id)
+      self.current_cart_id = new.id
+    end
+    
+  end
+  
   def current_cart_id
     cart = CurrentCart.find_by(user_id: self.id)
     if !cart.nil?
