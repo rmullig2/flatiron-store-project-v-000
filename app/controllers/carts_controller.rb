@@ -12,8 +12,10 @@ class CartsController < ApplicationController
       item.save
     end
     current_cart.update(status: "submitted")
-    current_cart.update_attribute :line_items, nil
-    #current_user.update(current_cart: nil)
+    current_cart.line_items.each do |li|
+      current_cart.line_items.delete(li)
+    end
+    CurrentCart.find_by(user_id: current_user.id).delete
     redirect_to cart_path(current_cart.id)
   end
 

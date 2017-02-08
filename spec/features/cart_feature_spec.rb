@@ -33,27 +33,27 @@ describe 'Feature Test: Cart', :type => :feature do
        expect(page).to_not have_button("Checkout")
      end
   
-  #   it "subtracts quantity from inventory" do
-  #     @second_line_item.quantity = 3
-  #     @second_line_item.save
-  #     first_item_inventory_before = @first_item.inventory
-  #     second_item_inventory_before = @second_item.inventory
-  #     visit cart_path(@user.current_cart)
-  #     click_button("Checkout")
-  #
-  #     @second_item.reload
-  #     @first_item.reload
-  #     expect(@first_item.inventory).to eq(first_item_inventory_before-1)
-  #     expect(@second_item.inventory).to eq(second_item_inventory_before-3)
-  #   end
-  #
-  #   it "sets current_cart to nil on checkout" do
-  #     visit cart_path(@user.current_cart)
-  #     click_button("Checkout")
-  #
-  #     @user.reload
-  #     expect(@user.current_cart).to be_nil 
-  #   end
+     it "subtracts quantity from inventory" do
+       @second_line_item.quantity = 3
+       @second_line_item.save
+       first_item_inventory_before = @first_item.inventory
+       second_item_inventory_before = @second_item.inventory
+       visit cart_path(@user.current_cart)
+       click_button("Checkout")
+  
+       @second_item.reload
+       @first_item.reload
+       expect(@first_item.inventory).to eq(first_item_inventory_before-1)
+       expect(@second_item.inventory).to eq(second_item_inventory_before-3)
+     end
+  
+     it "sets current_cart to nil on checkout" do
+       visit cart_path(@user.current_cart)
+       click_button("Checkout")
+  
+       @user.reload
+       expect(@user.current_cart).to be_nil 
+     end
     end
   end
   describe "Adding To Cart" do

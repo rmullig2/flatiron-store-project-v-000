@@ -5,11 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :carts
   has_one :current_cart
-  #attr_reader :current_cart
-  
-  #def current_cart=(cart)
-  #  @current_cart = cart
-  #end
   
   attr_accessor :current_cart_id
   
@@ -42,12 +37,4 @@ class User < ActiveRecord::Base
     save
   end
   
-  #def current_cart
-  #  binding.pry
-  #  if self.current_cart_id.nil?
-  #    return nil
-  #  else
-  #    Cart.find(self.current_cart_id)
-  #  end
-  #end
 end
