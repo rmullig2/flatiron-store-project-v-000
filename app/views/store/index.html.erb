@@ -10,7 +10,7 @@
 
 <% if user_signed_in? %>
   <p>Signed in as <%= current_user.email %></p>
-  <% if !current_user.current_cart.nil? %>
-    <%= link_to 'Cart', cart_path(current_user.current_cart.id) %>
+  <% if !current_user.current_cart_id.nil? %>
+    <%= link_to 'Cart', cart_path(current_user.current_cart_id) %>
   <% end %>
 <% end %>

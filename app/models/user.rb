@@ -4,14 +4,27 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :carts
-  attr_reader :current_cart
-  attr_accessor :current_cart_id
+  has_one :current_cart
+  #attr_reader :current_cart
+  
   #def current_cart=(cart)
   #  @current_cart = cart
   #end
   
+  attr_accessor :current_cart_id
+  
+  def current_cart_id
+    cart = CurrentCart.find_by(user_id: self.id)
+    if !cart.nil?
+      cart.cart_id
+    else
+      nil
+    end
+  end
+  
   def create_current_cart
     new_cart = carts.create
+    CurrentCart.create(user_id: self.id, cart_id: new_cart.id)
     self.current_cart_id = new_cart.id
     save
   end
